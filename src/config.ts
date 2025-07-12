@@ -25,9 +25,6 @@ export function validateConfig(config: BybitConfigType): void {
     throw new Error('BYBIT_API_KEY and BYBIT_API_SECRET environment variables are required');
   }
 
-  if (config.environment === 'mainnet') {
-    console.warn('⚠️  WARNING: Running in MAINNET mode. Trading operations will use real funds!');
-  } else {
-    console.log('ℹ️  Running in TESTNET mode. Trading operations are safe for testing.');
-  }
+  // Note: Avoid console output in MCP servers as it interferes with JSON-RPC protocol
+  // Environment info is logged via logError in server.ts instead
 }
