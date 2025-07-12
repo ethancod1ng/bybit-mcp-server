@@ -3,6 +3,7 @@
 > **Multi-language Documentation**
 > - [English](README.md)
 > - [中文](README_CN.md)
+> - [日本語](README_JA.md)
 
 A Model Context Protocol (MCP) server for Bybit exchange, enabling AI coding tools like Claude Code and Cursor to interact with Bybit's trading platform.
 
@@ -16,24 +17,44 @@ npm install -g bybit-mcp-server
 
 ### Configuration
 
-Supported AI Tools:
-- Claude Code
-- Cursor
-- Any MCP-compatible AI tool
+This MCP server can be used with various AI tools that support MCP:
+
+[![Claude](https://img.shields.io/badge/Claude-FF6B35?style=for-the-badge&logo=anthropic&logoColor=white)](https://claude.ai) [![Cursor](https://img.shields.io/badge/Cursor-000000?style=for-the-badge&logo=cursor&logoColor=white)](https://cursor.sh)
 
 #### Claude Code Configuration
 
-Add to your Claude Code configuration:
+**For Testnet (Recommended - Safe for testing):**
+Add to `claude_desktop_config.json`:
 
 ```json
 {
   "mcpServers": {
     "bybit": {
-      "command": "bybit-mcp-server",
+      "command": "npx",
+      "args": ["bybit-mcp-server"],
       "env": {
-        "BYBIT_API_KEY": "your_api_key",
-        "BYBIT_API_SECRET": "your_api_secret",
+        "BYBIT_API_KEY": "your_testnet_api_key",
+        "BYBIT_API_SECRET": "your_testnet_api_secret",
         "BYBIT_ENVIRONMENT": "testnet"
+      }
+    }
+  }
+}
+```
+
+**For Mainnet (⚠️ WARNING: Uses real funds):**
+Add to `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "bybit": {
+      "command": "npx",
+      "args": ["bybit-mcp-server"],
+      "env": {
+        "BYBIT_API_KEY": "your_mainnet_api_key",
+        "BYBIT_API_SECRET": "your_mainnet_api_secret",
+        "BYBIT_ENVIRONMENT": "mainnet"
       }
     }
   }
@@ -42,32 +63,40 @@ Add to your Claude Code configuration:
 
 #### Cursor Configuration
 
-Add to your Cursor settings:
-
-```json
-{
-  "mcp.servers": {
-    "bybit": {
-      "command": "bybit-mcp-server",
-      "env": {
-        "BYBIT_API_KEY": "your_api_key",
-        "BYBIT_API_SECRET": "your_api_secret",
-        "BYBIT_ENVIRONMENT": "testnet"
-      }
-    }
-  }
-}
-```
+Use the same configuration as Claude Code above, but add to `.cursor/mcp_config.json` with `mcp.servers` instead of `mcpServers`.
 
 ### Environment Setup
 
-Create `.env` file:
+**Option 1: Testnet (Recommended)**
 ```env
-BYBIT_API_KEY=your_api_key_here
-BYBIT_API_SECRET=your_api_secret_here
+BYBIT_API_KEY=your_testnet_api_key_here
+BYBIT_API_SECRET=your_testnet_api_secret_here
 BYBIT_ENVIRONMENT=testnet
 DEBUG=false
 ```
+
+**Option 2: Mainnet (⚠️ Real funds)**
+```env
+BYBIT_API_KEY=your_mainnet_api_key_here
+BYBIT_API_SECRET=your_mainnet_api_secret_here
+BYBIT_ENVIRONMENT=mainnet
+DEBUG=false
+```
+
+### Getting API Keys
+
+**For Testnet:**
+1. Visit [Bybit Testnet](https://testnet.bybit.com/)
+2. Register an account
+3. Go to API Management and create API keys
+4. Enable required permissions (read, trade)
+
+**For Mainnet:**
+1. Visit [Bybit](https://www.bybit.com/)
+2. Complete account verification
+3. Go to API Management and create API keys
+4. Enable required permissions (read, trade)
+5. Set IP restrictions for additional security
 
 ## Available Tools
 
@@ -83,7 +112,7 @@ DEBUG=false
 - `get_open_orders` - Get list of open/active orders
 - `get_order_history` - Get historical orders
 
-### Trading (Testnet Only)
+### Trading (⚠️ Can use real funds on mainnet)
 - `place_order` - Place a new order
 - `cancel_order` - Cancel an existing order
 - `cancel_all_orders` - Cancel all orders for a symbol or category
@@ -101,10 +130,11 @@ Ask your AI assistant to:
 ## Security
 
 ⚠️ **Important Security Notes**:
-- Trading operations are **TESTNET ONLY** by default for safety
+- **TESTNET** is the default and recommended environment for safety
+- **MAINNET** operations use real funds - use with extreme caution
 - API keys are automatically redacted from error messages
-- Always use testnet for development and testing
-- Only switch to mainnet when you're absolutely sure about your implementation
+- Always test thoroughly on testnet before using mainnet
+- Trading operations will display warnings when using mainnet
 
 🔐 **API Key Safety**:
 - Never commit API keys to version control

@@ -3,6 +3,7 @@
 > **多语言文档**
 > - [English](README.md)
 > - [中文](README_CN.md)
+> - [日本語](README_JA.md)
 
 Bybit交易所的模型上下文协议（MCP）服务器，让Claude Code和Cursor等AI编程工具能够与Bybit交易平台进行交互。
 
@@ -16,24 +17,44 @@ npm install -g bybit-mcp-server
 
 ### 配置
 
-支持的AI工具：
-- Claude Code
-- Cursor
-- 任何支持MCP的AI工具
+此MCP服务器可与多种支持MCP的AI工具配合使用:
+
+[![Claude](https://img.shields.io/badge/Claude-FF6B35?style=for-the-badge&logo=anthropic&logoColor=white)](https://claude.ai) [![Cursor](https://img.shields.io/badge/Cursor-000000?style=for-the-badge&logo=cursor&logoColor=white)](https://cursor.sh)
 
 #### Claude Code 配置
 
-添加到您的Claude Code配置中：
+**测试网配置（推荐 - 安全测试）：**
+添加到 `claude_desktop_config.json`：
 
 ```json
 {
   "mcpServers": {
     "bybit": {
-      "command": "bybit-mcp-server",
+      "command": "npx",
+      "args": ["bybit-mcp-server"],
       "env": {
-        "BYBIT_API_KEY": "your_api_key",
-        "BYBIT_API_SECRET": "your_api_secret",
+        "BYBIT_API_KEY": "your_testnet_api_key",
+        "BYBIT_API_SECRET": "your_testnet_api_secret",
         "BYBIT_ENVIRONMENT": "testnet"
+      }
+    }
+  }
+}
+```
+
+**主网配置（⚠️ 警告：使用真实资金）：**
+添加到 `claude_desktop_config.json`：
+
+```json
+{
+  "mcpServers": {
+    "bybit": {
+      "command": "npx",
+      "args": ["bybit-mcp-server"],
+      "env": {
+        "BYBIT_API_KEY": "your_mainnet_api_key",
+        "BYBIT_API_SECRET": "your_mainnet_api_secret",
+        "BYBIT_ENVIRONMENT": "mainnet"
       }
     }
   }
@@ -42,32 +63,40 @@ npm install -g bybit-mcp-server
 
 #### Cursor 配置
 
-添加到您的Cursor设置中：
-
-```json
-{
-  "mcp.servers": {
-    "bybit": {
-      "command": "bybit-mcp-server",
-      "env": {
-        "BYBIT_API_KEY": "your_api_key",
-        "BYBIT_API_SECRET": "your_api_secret",
-        "BYBIT_ENVIRONMENT": "testnet"
-      }
-    }
-  }
-}
-```
+使用与上述Claude Code相同的配置，但添加到 `.cursor/mcp_config.json` 并使用 `mcp.servers` 替代 `mcpServers`。
 
 ### 环境设置
 
-创建 `.env` 文件：
+**选项1：测试网（推荐）**
 ```env
-BYBIT_API_KEY=your_api_key_here
-BYBIT_API_SECRET=your_api_secret_here
+BYBIT_API_KEY=your_testnet_api_key_here
+BYBIT_API_SECRET=your_testnet_api_secret_here
 BYBIT_ENVIRONMENT=testnet
 DEBUG=false
 ```
+
+**选项2：主网（⚠️ 真实资金）**
+```env
+BYBIT_API_KEY=your_mainnet_api_key_here
+BYBIT_API_SECRET=your_mainnet_api_secret_here
+BYBIT_ENVIRONMENT=mainnet
+DEBUG=false
+```
+
+### 获取API密钥
+
+**测试网：**
+1. 访问 [Bybit测试网](https://testnet.bybit.com/)
+2. 注册账户
+3. 前往API管理页面创建API密钥
+4. 启用所需权限（读取、交易）
+
+**主网：**
+1. 访问 [Bybit](https://www.bybit.com/)
+2. 完成账户验证
+3. 前往API管理页面创建API密钥
+4. 启用所需权限（读取、交易）
+5. 设置IP限制以增强安全性
 
 ## 可用工具
 
@@ -83,7 +112,7 @@ DEBUG=false
 - `get_open_orders` - 获取活跃订单列表
 - `get_order_history` - 获取历史订单
 
-### 交易功能（仅测试网）
+### 交易功能（⚠️ 主网将使用真实资金）
 - `place_order` - 下新订单
 - `cancel_order` - 取消现有订单
 - `cancel_all_orders` - 取消某个交易对或类别的所有订单
@@ -101,7 +130,8 @@ DEBUG=false
 ## 安全性
 
 ⚠️ **重要安全提示**：
-- 交易操作默认**仅限测试网**以确保安全
+- **测试网**是默认推荐的安全环境
+- **主网**操作使用真实资金 - 请极其谨慎使用
 - API密钥会自动从错误消息中隐藏
 - 开发和测试时始终使用测试网
 - 只有在完全确定实现正确时才切换到主网

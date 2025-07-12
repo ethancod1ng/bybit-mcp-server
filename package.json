@@ -12,7 +12,8 @@
     "dev": "tsx src/index.ts",
     "watch": "nodemon --exec tsx src/index.ts",
     "lint": "eslint src/**/*.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build && npm run lint && npm run typecheck"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.4.0",
@@ -33,6 +34,21 @@
     "node": ">=18.0.0"
   },
   "license": "MIT",
-  "author": "Claude",
-  "keywords": ["bybit", "mcp", "server", "api", "trading"]
+  "author": "Ethan",
+  "keywords": ["bybit", "mcp", "claude", "server", "api", "trading", "cryptocurrency", "exchange"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethancod1ng/bybit-mcp-server.git"
+  },
+  "homepage": "https://github.com/ethancod1ng/bybit-mcp-server#readme",
+  "bugs": {
+    "url": "https://github.com/ethancod1ng/bybit-mcp-server/issues"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "README_CN.md",
+    "README_JA.md",
+    "CLAUDE.md"
+  ]
 }

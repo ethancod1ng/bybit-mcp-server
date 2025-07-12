@@ -86,7 +86,7 @@ export const tools: Tool[] = [
   },
   {
     name: 'place_order',
-    description: 'Place a new order (testnet only for safety)',
+    description: 'Place a new order (⚠️ WARNING: Can use real funds on mainnet)',
     inputSchema: {
       type: 'object',
       properties: PlaceOrderSchema.shape,
@@ -95,7 +95,7 @@ export const tools: Tool[] = [
   },
   {
     name: 'cancel_order',
-    description: 'Cancel an existing order (testnet only for safety)',
+    description: 'Cancel an existing order (⚠️ WARNING: Affects real orders on mainnet)',
     inputSchema: {
       type: 'object',
       properties: CancelOrderSchema.shape,
@@ -104,7 +104,7 @@ export const tools: Tool[] = [
   },
   {
     name: 'cancel_all_orders',
-    description: 'Cancel all orders for a symbol or category (testnet only for safety)',
+    description: 'Cancel all orders for a symbol or category (⚠️ WARNING: Affects real orders on mainnet)',
     inputSchema: {
       type: 'object',
       properties: {

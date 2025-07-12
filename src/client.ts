@@ -130,8 +130,8 @@ export class BybitClient {
     timeInForce?: string;
   }) {
     try {
-      if (this.config.environment !== 'testnet') {
-        throw new Error('Trading is only allowed in testnet mode for safety');
+      if (this.config.environment === 'mainnet') {
+        console.error('⚠️  WARNING: Placing order on MAINNET with real funds!');
       }
 
       const response = await this.client.submitOrder({
@@ -151,8 +151,8 @@ export class BybitClient {
 
   async cancelOrder(category: string, symbol: string, orderId?: string, orderLinkId?: string) {
     try {
-      if (this.config.environment !== 'testnet') {
-        throw new Error('Trading is only allowed in testnet mode for safety');
+      if (this.config.environment === 'mainnet') {
+        console.error('⚠️  WARNING: Canceling order on MAINNET!');
       }
 
       const response = await this.client.cancelOrder({
@@ -169,8 +169,8 @@ export class BybitClient {
 
   async cancelAllOrders(category: string, symbol?: string) {
     try {
-      if (this.config.environment !== 'testnet') {
-        throw new Error('Trading is only allowed in testnet mode for safety');
+      if (this.config.environment === 'mainnet') {
+        console.error('⚠️  WARNING: Canceling ALL orders on MAINNET!');
       }
 
       const response = await this.client.cancelAllOrders({
