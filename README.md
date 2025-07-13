@@ -1,4 +1,5 @@
 # Bybit MCP Server
+[![smithery badge](https://smithery.ai/badge/@ethancod1ng/bybit-mcp-server)](https://smithery.ai/server/@ethancod1ng/bybit-mcp-server)
 
 > **Multi-language Documentation**
 > - [English](README.md)
@@ -11,6 +12,15 @@ A Model Context Protocol (MCP) server for Bybit exchange, enabling AI coding too
 
 ### Installation
 
+#### Installing via Smithery
+
+To install bybit-mcp-server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@ethancod1ng/bybit-mcp-server):
+
+```bash
+npx -y @smithery/cli install @ethancod1ng/bybit-mcp-server --client claude
+```
+
+#### Installing Manually
 ```bash
 npm install -g bybit-mcp-server
 ```
