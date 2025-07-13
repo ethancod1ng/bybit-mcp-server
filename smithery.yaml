@@ -1,0 +1,48 @@
+# Smithery configuration file: https://smithery.ai/docs/build/project-config
+
+startCommand:
+  type: stdio
+  commandFunction:
+    # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
+    |-
+    (config) => ({
+      command: 'node',
+      args: ['dist/index.js'],
+      env: {
+        BYBIT_API_KEY: config.apiKey,
+        BYBIT_API_SECRET: config.apiSecret,
+        BYBIT_ENVIRONMENT: config.environment,
+        ...(config.baseUrl ? { BYBIT_BASE_URL: config.baseUrl } : {}),
+        DEBUG: config.debug ? 'true' : 'false'
+      }
+    })
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+    required:
+      - apiKey
+      - apiSecret
+    properties:
+      apiKey:
+        type: string
+        description: Your Bybit API key
+      apiSecret:
+        type: string
+        description: Your Bybit API secret
+      environment:
+        type: string
+        default: testnet
+        description: "Bybit environment to use: testnet or mainnet"
+      baseUrl:
+        type: string
+        description: Custom Bybit API base URL
+      debug:
+        type: boolean
+        default: false
+        description: Enable debug logging
+  exampleConfig:
+    apiKey: test_api_key
+    apiSecret: test_api_secret
+    environment: testnet
+    baseUrl: https://api-testnet.bybit.com
+    debug: false
