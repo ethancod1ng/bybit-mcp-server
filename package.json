@@ -1,7 +1,7 @@
 {
   "name": "bybit-mcp-server",
   "version": "1.0.0",
-  "description": "Bybit MCP Server for Claude Code integration",
+  "description": "MCP server for Bybit trading API access",
   "main": "dist/index.js",
   "bin": {
     "bybit-mcp-server": "./dist/index.js"
