@@ -1,5 +1,6 @@
 # Bybit MCP Server
 [![smithery badge](https://smithery.ai/badge/@ethancod1ng/bybit-mcp-server)](https://smithery.ai/server/@ethancod1ng/bybit-mcp-server)
+[![npm](https://img.shields.io/npm/dt/bybit-mcp-server?label=npm%20downloads)](https://www.npmjs.com/package/bybit-mcp-server)
 
 > **Multi-language Documentation**
 > - [English](README.md)
