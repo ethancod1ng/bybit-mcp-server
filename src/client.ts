@@ -28,7 +28,7 @@ export class BybitClient {
       });
       return response;
     } catch (error) {
-      throw new Error(`Failed to get price for ${symbol}: ${error}`);
+      throw new Error(`Failed to get price for ${symbol}: ${error instanceof Error ? error.message : JSON.stringify(error)}`);
     }
   }
 
@@ -41,7 +41,7 @@ export class BybitClient {
       });
       return response;
     } catch (error) {
-      throw new Error(`Failed to get order book for ${symbol}: ${error}`);
+      throw new Error(`Failed to get order book for ${symbol}: ${error instanceof Error ? error.message : JSON.stringify(error)}`);
     }
   }
 
@@ -55,7 +55,7 @@ export class BybitClient {
       });
       return response;
     } catch (error) {
-      throw new Error(`Failed to get klines for ${symbol}: ${error}`);
+      throw new Error(`Failed to get klines for ${symbol}: ${error instanceof Error ? error.message : JSON.stringify(error)}`);
     }
   }
 
@@ -67,7 +67,7 @@ export class BybitClient {
       });
       return response;
     } catch (error) {
-      throw new Error(`Failed to get 24hr ticker: ${error}`);
+      throw new Error(`Failed to get 24hr ticker: ${error instanceof Error ? error.message : JSON.stringify(error)}`);
     }
   }
 
@@ -78,7 +78,7 @@ export class BybitClient {
       });
       return response;
     } catch (error) {
-      throw new Error(`Failed to get account info: ${error}`);
+      throw new Error(`Failed to get account info: ${error instanceof Error ? error.message : JSON.stringify(error)}`);
     }
   }
 
@@ -90,7 +90,7 @@ export class BybitClient {
       });
       return response;
     } catch (error) {
-      throw new Error(`Failed to get wallet balance: ${error}`);
+      throw new Error(`Failed to get wallet balance: ${error instanceof Error ? error.message : JSON.stringify(error)}`);
     }
   }
 
@@ -103,7 +103,7 @@ export class BybitClient {
       });
       return response;
     } catch (error) {
-      throw new Error(`Failed to get open orders: ${error}`);
+      throw new Error(`Failed to get open orders: ${error instanceof Error ? error.message : JSON.stringify(error)}`);
     }
   }
 
@@ -116,7 +116,7 @@ export class BybitClient {
       });
       return response;
     } catch (error) {
-      throw new Error(`Failed to get order history: ${error}`);
+      throw new Error(`Failed to get order history: ${error instanceof Error ? error.message : JSON.stringify(error)}`);
     }
   }
 
@@ -145,7 +145,7 @@ export class BybitClient {
       });
       return response;
     } catch (error) {
-      throw new Error(`Failed to place order: ${error}`);
+      throw new Error(`Failed to place order: ${error instanceof Error ? error.message : JSON.stringify(error)}`);
     }
   }
 
@@ -163,7 +163,7 @@ export class BybitClient {
       });
       return response;
     } catch (error) {
-      throw new Error(`Failed to cancel order: ${error}`);
+      throw new Error(`Failed to cancel order: ${error instanceof Error ? error.message : JSON.stringify(error)}`);
     }
   }
 
@@ -179,7 +179,7 @@ export class BybitClient {
       });
       return response;
     } catch (error) {
-      throw new Error(`Failed to cancel all orders: ${error}`);
+      throw new Error(`Failed to cancel all orders: ${error instanceof Error ? error.message : JSON.stringify(error)}`);
     }
   }
 }
